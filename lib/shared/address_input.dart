@@ -28,16 +28,17 @@ class AddressInput extends StatelessWidget {
             children: [
               Text(
                 title!,
-                style: GoogleFonts.raleway(
-                    fontSize: 16.0, fontWeight: FontWeight.w400),
+                style: GoogleFonts.raleway(fontSize: 16.0, color: Colors.grey),
               ),
               SizedBox(
                 height: 3,
               ),
               Text(
                 subTitle!,
+                overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.raleway(
-                    textStyle: TextStyle(fontSize: 16.0, color: Colors.grey)),
+                    textStyle:
+                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500)),
               )
             ],
           )
