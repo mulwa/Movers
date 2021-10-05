@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movers/controllers/transport_details_controller.dart';
+import 'package:movers/screen/schedule_details.dart';
 import 'package:movers/shared/app_card.dart';
+import 'package:movers/shared/custom_btn.dart';
 import 'package:movers/shared/vertical_spacing.dart';
 import 'package:movers/utils/constants.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class TransportDetailsPage extends GetView<TransportDetailsController> {
   const TransportDetailsPage({Key? key}) : super(key: key);
@@ -20,14 +23,9 @@ class TransportDetailsPage extends GetView<TransportDetailsController> {
           padding: const EdgeInsets.all(16.0),
           child: ListView(
             children: [
-              Center(
-                child: Text(
-                  "What size vehicle dro you prefer ?",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w600),
-                ),
+              Text(
+                "What size vehicle dro you prefer ?",
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
               ),
               VerticalSpacing(),
               Column(
@@ -49,7 +47,7 @@ class TransportDetailsPage extends GetView<TransportDetailsController> {
                                             color: Colors.black),
                                       ),
                                       Text(
-                                          "Great for a couple of items or muiltiple small items")
+                                          "Great for a couple of items or multiple small items")
                                     ],
                                   ),
                                   value: vehicle,
@@ -60,6 +58,101 @@ class TransportDetailsPage extends GetView<TransportDetailsController> {
                             );
                           }))
                       .toList()),
+              VerticalSpacing(),
+              Text(
+                "Set moving date ",
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
+              ),
+              VerticalSpacing(),
+              GestureDetector(
+                onTap: () async {
+                  controller.setMovingDate();
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(4),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 5.0,
+                            offset: Offset(0.7, 0.7))
+                      ]),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.date_range,
+                          color: Colors.blueAccent,
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Obx(() => Text(
+                            controller.movingDate.isEmpty
+                                ? "Moving Date"
+                                : controller.movingDate.value,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                            )))
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              VerticalSpacing(),
+              Text(
+                " Set moving time ",
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
+              ),
+              VerticalSpacing(),
+              GestureDetector(
+                onTap: () async {
+                  controller.setMovingTime();
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(4),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 5.0,
+                            offset: Offset(0.7, 0.7))
+                      ]),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.time_to_leave,
+                          color: Colors.blueAccent,
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Obx(() => Text(
+                            controller.movingTime.isEmpty
+                                ? "Moving Time"
+                                : controller.movingTime.value,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                            )))
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              VerticalSpacing(
+                height: 15.0,
+              ),
+              CustomBtn(
+                text: "Continue",
+                press: () {
+                  Get.to(ScheduleDetails());
+                },
+              )
             ],
           ),
         ),

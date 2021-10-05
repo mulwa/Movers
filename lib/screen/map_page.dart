@@ -59,8 +59,7 @@ class MapPage extends StatelessWidget {
                                             result.geometry!.location.lng;
                                         fromAddress.placeFormattedAddress =
                                             result.formattedAddress;
-                                        fromAddress.placeName =
-                                            result.adrAddress;
+                                        fromAddress.placeName = result.name;
                                         fromAddress.placeId = result.id;
                                         _mapPageController
                                             .updatePickupAddress(fromAddress);
@@ -106,7 +105,7 @@ class MapPage extends StatelessWidget {
                                             result.geometry!.location.lng;
                                         toAddress.placeFormattedAddress =
                                             result.formattedAddress;
-                                        toAddress.placeName = result.adrAddress;
+                                        toAddress.placeName = result.name;
                                         toAddress.placeId = result.id;
 
                                         _mapPageController
