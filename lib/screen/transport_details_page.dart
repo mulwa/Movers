@@ -147,11 +147,13 @@ class TransportDetailsPage extends GetView<TransportDetailsController> {
               VerticalSpacing(
                 height: 15.0,
               ),
-              CustomBtn(
-                text: "Continue",
-                press: () {
-                  Get.to(ScheduleDetails());
-                },
+              Center(
+                child: CustomBtn(
+                  text: "Continue",
+                  press: () {
+                    Get.to(ScheduleDetails());
+                  },
+                ),
               )
             ],
           ),

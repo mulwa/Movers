@@ -60,8 +60,6 @@ class MapPageController extends GetxController {
   }
 
   Future<void> getDirection() async {
-    print("hello");
-
     var pickLatLng =
         LatLng(pickupAddress.value.latitude!, pickupAddress.value.longitude!);
     var destinationLatLng = LatLng(destinationAddress.value.latitude!,

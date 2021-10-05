@@ -37,6 +37,7 @@ dependencies:
   flutter_polyline_points: ^1.0.0
   provider: ^5.0.0
   flutter_datetime_picker: ^1.5.1
+  intl: ^0.17.0
   
 
 dev_dependencies:

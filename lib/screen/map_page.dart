@@ -139,7 +139,7 @@ class MapPage extends StatelessWidget {
                         ? Expanded(
                             child: GoogleMap(
                               initialCameraPosition:
-                                  _mapPageController.kGooglePlex,
+                                  _mapPageController.cameraPosition,
                               polylines: _mapPageController.mapPolyline,
                               markers: _mapPageController.markers,
                               circles: _mapPageController.circle,

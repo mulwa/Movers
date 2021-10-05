@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:movers/controllers/map_page_controller.dart';
 import 'package:movers/controllers/transport_details_controller.dart';
 import 'package:movers/shared/app_card.dart';
+import 'package:movers/shared/custom_btn.dart';
 import 'package:movers/shared/styles.dart';
 import 'package:movers/shared/vertical_spacing.dart';
 
@@ -23,9 +24,9 @@ class ScheduleDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: 300,
+                  height: 200,
                   child: GoogleMap(
-                    initialCameraPosition: mapController.kGooglePlex,
+                    initialCameraPosition: mapController.cameraPosition,
                     polylines: mapController.mapPolyline,
                     markers: mapController.markers,
                     circles: mapController.circle,
@@ -87,12 +88,56 @@ class ScheduleDetails extends StatelessWidget {
                       VerticalSpacing(),
                       Divider(),
                       VerticalSpacing(),
-                      Text(transportDetailsController.movingDate.value),
+                      Text(
+                        "Scheduled date & time",
+                        style: greyTitleStyle,
+                      ),
+                      VerticalSpacing(
+                        height: 5.0,
+                      ),
+                      Text(
+                        "${transportDetailsController.movingDate.value} at ${transportDetailsController.movingTime.value}",
+                        style: mediumTitleStyle,
+                      ),
+                      VerticalSpacing(
+                        height: 5.0,
+                      ),
+                      Divider(),
+                      Text(
+                        "Selected Vehicle Type",
+                        style: greyTitleStyle,
+                      ),
+                      VerticalSpacing(height: 5.0),
+                      Text(
+                        transportDetailsController.selectedVehicle.value,
+                        style: mediumTitleStyle,
+                      ),
+                      VerticalSpacing(
+                        height: 5.0,
+                      ),
+                      Divider(),
                       VerticalSpacing(),
-                      Text(transportDetailsController.movingTime.value)
+                      Text(
+                        "Total amount to pay",
+                        style: greyTitleStyle,
+                      ),
+                      VerticalSpacing(height: 5.0),
+                      Text(
+                        "Ksh ${transportDetailsController.fareEstimate(mapController.tripDirectionDetails.value)}",
+                        style: mediumTitleStyle,
+                      )
                     ],
                   ),
                 ),
+                VerticalSpacing(),
+                Center(
+                  child: CustomBtn(
+                    text: "Submit my Request",
+                    press: () {
+                      print("submiting my request");
+                    },
+                  ),
+                )
               ],
             )));
   }
