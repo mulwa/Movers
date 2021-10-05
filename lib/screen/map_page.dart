@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 import 'package:movers/controllers/map_page_controller.dart';
 import 'package:movers/models/address_model.dart';
+import 'package:movers/screen/transport_details_page.dart';
 import 'package:movers/shared/address_input.dart';
 import 'package:movers/shared/custom_btn.dart';
 import 'package:movers/shared/shifter_divider.dart';
@@ -153,7 +154,7 @@ class MapPage extends StatelessWidget {
                     CustomBtn(
                       text: "Continue",
                       press: () {
-                        print("next");
+                        Get.to(TransportDetailsPage());
                       },
                     )
                   ],

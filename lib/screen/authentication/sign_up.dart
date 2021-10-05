@@ -29,30 +29,30 @@ class SignUpPage extends GetView<SignUpController> {
   }
 
   Widget _buildPasswordField() {
-    return TextFormField(
-      decoration: InputDecoration(
-          border: InputBorder.none,
-          fillColor: inputBackground,
-          filled: true,
-          hintText: "Password",
-          suffixIcon: IconButton(
-              icon: Icon(
-                controller.passwordVisible.value
-                    ? Icons.visibility_off
-                    : Icons.visibility,
-              ),
-              onPressed: () {
-                controller.changePasswordVisibility();
-              })),
-      obscureText: controller.passwordVisible.value ? true : false,
-      controller: controller.passwordController,
-      focusNode: controller.passwordFocusNode,
-      textInputAction: TextInputAction.done,
-      onEditingComplete: () {},
-      validator: (String? value) {
-        return controller.validatePassword(value!);
-      },
-    );
+    return Obx(() => TextFormField(
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: inputBackground,
+              filled: true,
+              hintText: "Password",
+              suffixIcon: IconButton(
+                  icon: Icon(
+                    controller.passwordVisible.value
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                  ),
+                  onPressed: () {
+                    controller.changePasswordVisibility();
+                  })),
+          obscureText: controller.passwordVisible.value ? true : false,
+          controller: controller.passwordController,
+          focusNode: controller.passwordFocusNode,
+          textInputAction: TextInputAction.done,
+          onEditingComplete: () {},
+          validator: (String? value) {
+            return controller.validatePassword(value!);
+          },
+        ));
   }
 
   @override
