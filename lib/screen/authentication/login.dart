@@ -6,6 +6,7 @@ import 'package:movers/screen/authentication/sign_up.dart';
 import 'package:movers/shared/app_card.dart';
 import 'package:movers/shared/custom_btn.dart';
 import 'package:movers/shared/custom_input_decoration.dart';
+import 'package:movers/shared/styles.dart';
 import 'package:movers/shared/vertical_spacing.dart';
 import 'package:movers/utils/constants.dart';
 
@@ -63,6 +64,12 @@ class LoginPage extends GetView<LoginController> {
     return SafeArea(
       child: Scaffold(
         body: ListView(children: [
+          Text(
+            "Enter your number",
+            style: mediumTitleStyle,
+          ),
+          VerticalSpacing(),
+          Text("We will sent a code to verify you mobile number"),
           Positioned(
               top: 100.0,
               child: Container(
