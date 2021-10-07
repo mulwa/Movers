@@ -6,6 +6,7 @@ import 'package:movers/screen/authentication/login.dart';
 import 'package:movers/shared/app_card.dart';
 import 'package:movers/shared/custom_btn.dart';
 import 'package:movers/shared/custom_input_decoration.dart';
+import 'package:movers/shared/styles.dart';
 import 'package:movers/shared/vertical_spacing.dart';
 import 'package:movers/utils/constants.dart';
 
@@ -20,39 +21,27 @@ class SignUpPage extends GetView<SignUpController> {
       keyboardType: TextInputType.emailAddress,
       controller: controller.emailController,
       focusNode: controller.emailFocusNode,
-      textInputAction: TextInputAction.next,
-      onEditingComplete: controller.emailEditingComplete,
+      textInputAction: TextInputAction.done,
       validator: (value) {
         return controller.validateAddress(value!);
       },
     );
   }
 
-  Widget _buildPasswordField() {
-    return Obx(() => TextFormField(
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              fillColor: inputBackground,
-              filled: true,
-              hintText: "Password",
-              suffixIcon: IconButton(
-                  icon: Icon(
-                    controller.passwordVisible.value
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                  ),
-                  onPressed: () {
-                    controller.changePasswordVisibility();
-                  })),
-          obscureText: controller.passwordVisible.value ? true : false,
-          controller: controller.passwordController,
-          focusNode: controller.passwordFocusNode,
-          textInputAction: TextInputAction.done,
-          onEditingComplete: () {},
-          validator: (String? value) {
-            return controller.validatePassword(value!);
-          },
-        ));
+  Widget _buildNameField() {
+    return TextFormField(
+      decoration: CustomInputDecoration(
+        labelText: 'Full Name',
+      ),
+      keyboardType: TextInputType.emailAddress,
+      controller: controller.nameController,
+      focusNode: controller.nameFocusNode,
+      textInputAction: TextInputAction.next,
+      onEditingComplete: controller.nameEditingComplete,
+      validator: (value) {
+        return controller.validateName(value!);
+      },
+    );
   }
 
   @override
@@ -73,39 +62,20 @@ class SignUpPage extends GetView<SignUpController> {
                       VerticalSpacing(
                         height: 15,
                       ),
-                      Text("Sign Up",
-                          style: TextStyle(color: textColor, fontSize: 20.0)),
-                      VerticalSpacing(
-                        height: 15,
-                      ),
+                      Center(
+                          child: Text(
+                        "Please provide the following information",
+                        style: mediumTitleStyle,
+                        textAlign: TextAlign.center,
+                      )),
+                      VerticalSpacing(),
+                      _buildNameField(),
+                      VerticalSpacing(),
                       _buildEmailField(),
                       VerticalSpacing(),
-                      _buildPasswordField(),
-                      VerticalSpacing(),
                       CustomBtn(
-                        text: "create account",
+                        text: "Save",
                         press: () async {},
-                      ),
-                      VerticalSpacing(),
-                      Center(
-                        child: RichText(
-                          text: TextSpan(
-                              text: "Already have an account?",
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 16.0),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: " Login",
-                                    style: TextStyle(
-                                        color: colorPrimaryDark,
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.w400),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Get.to(LoginPage());
-                                      })
-                              ]),
-                        ),
                       ),
                     ],
                   ),

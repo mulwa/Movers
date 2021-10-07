@@ -3,18 +3,17 @@ import 'package:get/get.dart';
 
 class SignUpController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late TextEditingController emailController, passwordController;
-  late FocusNode emailFocusNode, passwordFocusNode;
-  Rx<bool> passwordVisible = true.obs;
+  late TextEditingController emailController, nameController;
+  late FocusNode emailFocusNode, nameFocusNode;
 
   @override
   void onInit() {
     super.onInit();
     emailController = TextEditingController();
-    passwordController = TextEditingController();
+    nameController = TextEditingController();
 
     emailFocusNode = FocusNode();
-    passwordFocusNode = FocusNode();
+    nameFocusNode = FocusNode();
   }
 
   String? validateAddress(String value) {
@@ -24,19 +23,14 @@ class SignUpController extends GetxController {
     return null;
   }
 
-  String? validatePassword(String value) {
+  String? validateName(String value) {
     if (value.isEmpty) {
-      return "Password can not be empty";
+      return "Name cannot be empty";
     }
     return null;
   }
 
-  changePasswordVisibility() {
-    this.passwordVisible.value = !this.passwordVisible.value;
-    print(this.passwordVisible.value);
-  }
-
-  emailEditingComplete() {
-    FocusScope.of(Get.context!).requestFocus(passwordFocusNode);
+  nameEditingComplete() {
+    FocusScope.of(Get.context!).requestFocus(emailFocusNode);
   }
 }
