@@ -1,42 +1,40 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:movers/screen/authentication/sign_up.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 class LoginController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late TextEditingController emailController, passwordController;
-  late FocusNode emailFocusNode, passwordFocusNode;
-  Rx<bool> passwordVisible = true.obs;
+  late TextEditingController phoneNumberController, optController;
+  RxString initialCountry = 'KE'.obs;
+  RxString currentOtpText = ''.obs;
+  Rx<PhoneNumber> number = PhoneNumber(isoCode: 'KE').obs;
+  StreamController<ErrorAnimationType>? errorController;
 
   @override
   void onInit() {
     super.onInit();
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-
-    emailFocusNode = FocusNode();
-    passwordFocusNode = FocusNode();
+    phoneNumberController = TextEditingController();
+    optController = TextEditingController();
+    errorController = StreamController<ErrorAnimationType>();
   }
 
-  String? validateAddress(String value) {
-    if (value.isEmpty) {
-      return "Address can not be empty";
+  @override
+  void onClose() {
+    super.onClose();
+    phoneNumberController.dispose();
+    optController.dispose();
+  }
+
+  void verifyOpt() {
+    print('Verifying otp:' + currentOtpText.value);
+    if (currentOtpText.value.length != 4 || currentOtpText.value != '1234') {
+      errorController!.add(ErrorAnimationType.shake);
+    } else {
+      Get.to(SignUpPage());
     }
-    return null;
-  }
-
-  String? validatePassword(String value) {
-    if (value.isEmpty) {
-      return "Password can not be empty";
-    }
-    return null;
-  }
-
-  changePasswordVisibility() {
-    this.passwordVisible.value = !this.passwordVisible.value;
-    print(this.passwordVisible.value);
-  }
-
-  emailEditingComplete() {
-    FocusScope.of(Get.context!).requestFocus(passwordFocusNode);
   }
 }
