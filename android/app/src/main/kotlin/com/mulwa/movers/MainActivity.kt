@@ -1,4 +1,4 @@
-package com.example.movers
+package com.mulwa.movers
 
 import io.flutter.embedding.android.FlutterActivity
 

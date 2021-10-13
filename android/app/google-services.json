@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "604076523173",
+    "project_id": "movers-81e3a",
+    "storage_bucket": "movers-81e3a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604076523173:android:7fb15acb291a2a4dff974c",
+        "android_client_info": {
+          "package_name": "com.mulwa.movers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604076523173-1eep5la5mv0cvi0ie8kavmeoflr07bvq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mulwa.movers",
+            "certificate_hash": "ea0ffa6501d315fd995c448aaab564ec8bd31fdd"
+          }
+        },
+        {
+          "client_id": "604076523173-o4gdsa03ctonqjioiqidust6b9g4adv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8a-06xcWD-CqDNACDdTGq6JwImcvsbac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604076523173-o4gdsa03ctonqjioiqidust6b9g4adv3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
