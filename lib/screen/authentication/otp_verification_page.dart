@@ -13,6 +13,7 @@ class OtpVerification extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     Get.put(LoginController());
+    controller.login();
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -30,7 +31,9 @@ class OtpVerification extends GetView<LoginController> {
                 text: TextSpan(
                     text: "Enter the code sent to ",
                     children: [
-                      TextSpan(text: "+254707200314", style: mediumTitleStyle),
+                      TextSpan(
+                          text: "${controller.phoneNumber.value}",
+                          style: mediumTitleStyle),
                     ],
                     style: greyTitleStyle),
                 textAlign: TextAlign.center,
@@ -38,7 +41,7 @@ class OtpVerification extends GetView<LoginController> {
               VerticalSpacing(),
               PinCodeTextField(
                   appContext: context,
-                  length: 4,
+                  length: 6,
                   enablePinAutofill: true,
                   showCursor: false,
                   controller: controller.optController,
@@ -62,7 +65,8 @@ class OtpVerification extends GetView<LoginController> {
                   child: CustomBtn(
                     text: "Verify",
                     press: () {
-                      controller.verifyOpt();
+                      controller.verifyOpt(controller.myVerificationId.value,
+                          controller.currentOtpText.value);
                     },
                   ),
                 ),

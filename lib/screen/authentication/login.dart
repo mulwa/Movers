@@ -49,7 +49,8 @@ class LoginPage extends GetView<LoginController> {
                     ),
                     // countries: ["KE"],
                     onInputChanged: (PhoneNumber value) {
-                      print(value);
+                      print(value.phoneNumber);
+                      controller.phoneNumber.value = value.phoneNumber!;
                     },
                   ),
                 ),
@@ -62,6 +63,7 @@ class LoginPage extends GetView<LoginController> {
                 child: CustomBtn(
                     text: "Continue",
                     press: () async {
+                      // controller.login();
                       Get.to(OtpVerification());
                     }),
               ),
