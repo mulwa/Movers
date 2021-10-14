@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,12 +21,14 @@ class LoginController extends GetxController {
   RxString otpCode = ''.obs;
   RxString phoneNumber = ''.obs;
   RxString myVerificationId = ''.obs;
+  late CollectionReference usersRef;
 
   @override
   void onInit() {
     super.onInit();
     phoneNumberController = TextEditingController();
     optController = TextEditingController();
+    usersRef = FirebaseFirestore.instance.collection('users');
     errorController = StreamController<ErrorAnimationType>();
     _auth = FirebaseAuth.instance;
   }
@@ -52,11 +55,21 @@ class LoginController extends GetxController {
 
   onVerificationCompleted(PhoneAuthCredential credential) async {
     print("verification completed ${credential.smsCode}");
-    await _auth.signInWithCredential(credential).then((value) {
+    await _auth.signInWithCredential(credential).then((value) async {
       User? user = value.user;
       print("User Id ${user?.uid} ");
       if (user != null) {
-        Get.to(MapPage());
+        DocumentSnapshot userSnapshot = await usersRef.doc(user.uid).get();
+        if (userSnapshot.exists) {
+          print("User Exists continue to booking details");
+          Get.to(MapPage());
+        } else {
+          print("User don't exist Go to Add user Details");
+          Get.to(SignUpPage(
+            uid: user.uid,
+            phoneNumber: this.phoneNumber.value,
+          ));
+        }
       } else {
         print("User is NUll");
       }
@@ -79,9 +92,9 @@ class LoginController extends GetxController {
     print("code sent");
   }
 
-  _onCodeTimeout(String timeout) {
-    return null;
-  }
+  // _onCodeTimeout(String timeout) {
+  //   return null;
+  // }
 
   verifyOpt(String verificationId, String code) async {
     print("myVerificationId:::: ${myVerificationId.value}");
@@ -98,5 +111,17 @@ class LoginController extends GetxController {
       print("Error::::$e");
       Get.snackbar("Error", "${e.message}");
     }
+  }
+
+  Future getUser(String uid) async {
+    await usersRef
+        .doc(uid)
+        .get()
+        .then((value) => {
+              // _user = User.fromJson(value.data),
+              // print("Returned user from getUser ${_user.toString()}")
+            })
+        .catchError((onError) =>
+            print("Error while getting information of user  : $onError"));
   }
 }

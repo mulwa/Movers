@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:movers/controllers/sign_up_controller.dart';
 import 'package:movers/screen/authentication/login.dart';
 import 'package:movers/shared/app_card.dart';
@@ -11,7 +12,10 @@ import 'package:movers/shared/vertical_spacing.dart';
 import 'package:movers/utils/constants.dart';
 
 class SignUpPage extends GetView<SignUpController> {
-  const SignUpPage({Key? key}) : super(key: key);
+  final String uid;
+  final String phoneNumber;
+  const SignUpPage({required this.uid, required this.phoneNumber, Key? key})
+      : super(key: key);
 
   Widget _buildEmailField() {
     return TextFormField(
@@ -75,7 +79,10 @@ class SignUpPage extends GetView<SignUpController> {
                       VerticalSpacing(),
                       CustomBtn(
                         text: "Save",
-                        press: () async {},
+                        press: () async {
+                          controller.createUser(
+                              userId: this.uid, phoneNumber: phoneNumber);
+                        },
                       ),
                     ],
                   ),
