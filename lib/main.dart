@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
                 GoogleFonts.ralewayTextTheme(Theme.of(context).textTheme),
           ),
           textTheme: GoogleFonts.ralewayTextTheme(Theme.of(context).textTheme)),
-      home: LoginPage(),
+      home: MapPage(),
     );
   }
 }

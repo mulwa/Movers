@@ -7,6 +7,7 @@ import 'package:movers/screen/authentication/login.dart';
 import 'package:movers/shared/app_card.dart';
 import 'package:movers/shared/custom_btn.dart';
 import 'package:movers/shared/custom_input_decoration.dart';
+import 'package:movers/shared/progressDialog.dart';
 import 'package:movers/shared/styles.dart';
 import 'package:movers/shared/vertical_spacing.dart';
 import 'package:movers/utils/constants.dart';
@@ -53,43 +54,49 @@ class SignUpPage extends GetView<SignUpController> {
     Get.put(SignUpController());
     return SafeArea(
       child: Scaffold(
-        body: ListView(
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: 150.0, right: 10.0, left: 10.0),
-              height: MediaQuery.of(context).size.height,
-              child: AppCard(
-                child: Form(
-                  key: controller.formKey,
-                  child: Column(
-                    children: <Widget>[
-                      VerticalSpacing(
-                        height: 15,
+        body: Obx(
+          () => controller.loading.value
+              ? ProgressDialog()
+              : ListView(
+                  children: [
+                    Container(
+                      margin:
+                          EdgeInsets.only(top: 150.0, right: 10.0, left: 10.0),
+                      height: MediaQuery.of(context).size.height,
+                      child: AppCard(
+                        child: Form(
+                          key: controller.formKey,
+                          child: Column(
+                            children: <Widget>[
+                              VerticalSpacing(
+                                height: 15,
+                              ),
+                              Center(
+                                  child: Text(
+                                "Please provide the following information",
+                                style: mediumTitleStyle,
+                                textAlign: TextAlign.center,
+                              )),
+                              VerticalSpacing(),
+                              _buildNameField(),
+                              VerticalSpacing(),
+                              _buildEmailField(),
+                              VerticalSpacing(),
+                              CustomBtn(
+                                text: "Save",
+                                press: () async {
+                                  controller.createUser(
+                                      userId: this.uid,
+                                      phoneNumber: phoneNumber);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      Center(
-                          child: Text(
-                        "Please provide the following information",
-                        style: mediumTitleStyle,
-                        textAlign: TextAlign.center,
-                      )),
-                      VerticalSpacing(),
-                      _buildNameField(),
-                      VerticalSpacing(),
-                      _buildEmailField(),
-                      VerticalSpacing(),
-                      CustomBtn(
-                        text: "Save",
-                        press: () async {
-                          controller.createUser(
-                              userId: this.uid, phoneNumber: phoneNumber);
-                        },
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-          ],
         ),
       ),
     );

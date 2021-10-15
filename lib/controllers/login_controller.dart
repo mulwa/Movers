@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:movers/models/user_model.dart';
 import 'package:movers/screen/authentication/otp_verification_page.dart';
 import 'package:movers/screen/authentication/sign_up.dart';
 import 'package:movers/screen/map_page.dart';
@@ -22,6 +23,11 @@ class LoginController extends GetxController {
   RxString phoneNumber = ''.obs;
   RxString myVerificationId = ''.obs;
   late CollectionReference usersRef;
+  RxBool verifyingOtp = false.obs;
+
+  Rx<UserModel> userModel = UserModel().obs;
+  // Rx<User> firebaseUser;
+  RxBool isLoggedIn = false.obs;
 
   @override
   void onInit() {
@@ -32,6 +38,22 @@ class LoginController extends GetxController {
     errorController = StreamController<ErrorAnimationType>();
     _auth = FirebaseAuth.instance;
   }
+
+  @override
+  void onReady() {
+    super.onReady();
+    // firebaseUser = Rx<User>(_auth.currentUser);
+    // firebaseUser.bindStream(_auth.userChanges);
+    // ever(firebaseUser, _setInitialScreen);
+  }
+
+  // _setInitialScreen(User user) {
+  //   if (user == null) {
+  //     Get.offAll(() => AuthenticationScreen());
+  //   } else {
+  //     Get.offAll(() => HomeScreen());
+  //   }
+  // }
 
   @override
   void onClose() {
@@ -62,6 +84,7 @@ class LoginController extends GetxController {
         DocumentSnapshot userSnapshot = await usersRef.doc(user.uid).get();
         if (userSnapshot.exists) {
           print("User Exists continue to booking details");
+          _getUser(user.uid);
           Get.to(MapPage());
         } else {
           print("User don't exist Go to Add user Details");
@@ -97,31 +120,52 @@ class LoginController extends GetxController {
   // }
 
   verifyOpt(String verificationId, String code) async {
+    verifyingOtp.value = true;
     print("myVerificationId:::: ${myVerificationId.value}");
     print("OTP::: ${otpCode.value}");
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: myVerificationId.value, smsCode: otpCode.value);
 
     try {
-      await FirebaseAuth.instance.signInWithCredential(credential);
+      await FirebaseAuth.instance
+          .signInWithCredential(credential)
+          .then((value) async {
+        User? user = value.user;
+        debugPrint("User Id ${user?.uid} ");
+        if (user != null) {
+          DocumentSnapshot userSnapshot = await usersRef.doc(user.uid).get();
+          if (userSnapshot.exists) {
+            debugPrint("User Exists continue to booking details");
+            _getUser(user.uid);
+            Get.to(MapPage());
+          } else {
+            debugPrint("User don't exist Go to Add user Details");
+            Get.to(SignUpPage(
+              uid: user.uid,
+              phoneNumber: this.phoneNumber.value,
+            ));
+          }
+        } else {
+          debugPrint("User is NUll");
+        }
+      });
+      verifyingOtp.value = false;
       Get.snackbar("Success", "Logged In successfully");
+      // _getUser(credential.providerId);
       Get.to(MapPage());
     } on FirebaseAuthException catch (e) {
+      verifyingOtp.value = false;
       print("${e.message}");
       print("Error::::$e");
       Get.snackbar("Error", "${e.message}");
     }
   }
 
-  Future getUser(String uid) async {
-    await usersRef
-        .doc(uid)
+  _getUser(String userId) async {
+    userModel.value = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
         .get()
-        .then((value) => {
-              // _user = User.fromJson(value.data),
-              // print("Returned user from getUser ${_user.toString()}")
-            })
-        .catchError((onError) =>
-            print("Error while getting information of user  : $onError"));
+        .then((doc) => UserModel.fromSnapshot(doc));
   }
 }

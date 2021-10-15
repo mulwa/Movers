@@ -8,6 +8,7 @@ class SignUpController extends GetxController {
   late TextEditingController emailController, nameController;
   late FocusNode emailFocusNode, nameFocusNode;
   late CollectionReference usersRef;
+  RxBool loading = false.obs;
 
   @override
   void onInit() {
@@ -40,13 +41,18 @@ class SignUpController extends GetxController {
   }
 
   void createUser({required String userId, required String phoneNumber}) {
+    loading.value = true;
     usersRef.doc(userId).set({
       "name": nameController.text,
       "emailAddress": emailController.text,
       "phoneNumber": phoneNumber,
     }).then((_) {
+      loading.value = false;
       Get.snackbar("Success", "User details Updated Successfully");
       Get.to(MapPage());
+    }, onError: (error) {
+      loading.value = false;
+      print(error);
     });
   }
 }
