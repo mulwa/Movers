@@ -150,12 +150,14 @@ class MapPage extends StatelessWidget {
                             ),
                           )
                         : Expanded(child: Center(child: Text("waiting"))),
-                    CustomBtn(
-                      text: "Continue",
-                      press: () {
-                        Get.to(TransportDetailsPage());
-                      },
-                    )
+                    _mapPageController.mapPolyline.length > 0
+                        ? CustomBtn(
+                            text: "Continue",
+                            press: () {
+                              Get.to(TransportDetailsPage());
+                            },
+                          )
+                        : Container()
                   ],
                 ),
               ))),
