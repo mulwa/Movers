@@ -14,7 +14,10 @@ Widget createDrawerItem(
           padding: EdgeInsets.only(left: 8.0),
           child: Text(
             text!,
-            style: TextStyle(color: colorAccent, fontSize: 16.0),
+            style: TextStyle(
+                color: Colors.black54,
+                fontWeight: FontWeight.w500,
+                fontSize: 16.0),
           ),
         )
       ],

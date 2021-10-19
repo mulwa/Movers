@@ -25,7 +25,7 @@ class AppDrawer extends StatelessWidget {
               }),
           VerticalSpacing(),
           createDrawerItem(
-              icon: Icons.time_to_leave_outlined,
+              icon: Icons.history,
               text: "History",
               onTap: () {
                 Navigator.pop(context);
