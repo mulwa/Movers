@@ -12,7 +12,9 @@ class CustomInputDecoration extends InputDecoration {
             hintStyle: TextStyle(
               color: hintColor,
             ),
-            border: InputBorder.none,
-            fillColor: inputBackground,
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey, width: 5.0),
+            ),
+            fillColor: Colors.white,
             filled: true);
 }
