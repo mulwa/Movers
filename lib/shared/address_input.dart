@@ -25,25 +25,27 @@ class AddressInput extends StatelessWidget {
               SizedBox(
                 width: 12,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title!,
-                    style:
-                        GoogleFonts.raleway(fontSize: 16.0, color: Colors.grey),
-                  ),
-                  SizedBox(
-                    height: 3,
-                  ),
-                  Text(
-                    subTitle!,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.raleway(
-                        textStyle: TextStyle(
-                            fontSize: 16.0, fontWeight: FontWeight.w500)),
-                  )
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title!,
+                      style: GoogleFonts.raleway(
+                          fontSize: 16.0, color: Colors.grey),
+                    ),
+                    SizedBox(
+                      height: 3,
+                    ),
+                    Text(
+                      subTitle!,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.raleway(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, fontWeight: FontWeight.w500)),
+                    )
+                  ],
+                ),
               )
             ],
           ),
