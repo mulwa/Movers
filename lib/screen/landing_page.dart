@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:movers/screen/deliver/deliver_page.dart';
 import 'package:movers/screen/drawer/appdrawer.dart';
+import 'package:movers/screen/map_page.dart';
 import 'package:movers/shared/app_card.dart';
 import 'package:movers/shared/styles.dart';
 import 'package:movers/shared/vertical_spacing.dart';
@@ -36,6 +39,7 @@ class LandingPage extends StatelessWidget {
                     subtitle: Text('Schedule and book for later transport'),
                     onTap: () {
                       debugPrint('apartment moving');
+                      Get.to(MapPage());
                     },
                   ),
                 ),
@@ -78,6 +82,7 @@ class LandingPage extends StatelessWidget {
                     subtitle: Text('Lets help you move to your new Building'),
                     onTap: () {
                       debugPrint('Delivery');
+                      Get.to(DeliverPage());
                     },
                   ),
                 ),

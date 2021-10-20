@@ -20,8 +20,8 @@ class ScheduleDetails extends StatelessWidget {
             appBar: AppBar(
               title: Text("Schedule Details"),
             ),
-            body: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            body: ListView(
+              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   height: 200,
@@ -129,7 +129,9 @@ class ScheduleDetails extends StatelessWidget {
                     ],
                   ),
                 ),
-                VerticalSpacing(),
+                VerticalSpacing(
+                  height: 15,
+                ),
                 Center(
                   child: CustomBtn(
                     text: "Submit my Request",
@@ -149,13 +151,16 @@ class ScheduleDetails extends StatelessWidget {
         SizedBox(
           width: 5.0,
         ),
-        Column(
-          children: [
-            Text(
-              title,
-              style: mediumTitleStyle,
-            ),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: mediumTitleStyle,
+              ),
+            ],
+          ),
         )
       ],
     );
