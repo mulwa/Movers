@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:movers/models/user_model.dart';
+import 'package:movers/screen/authentication/login.dart';
 import 'package:movers/screen/authentication/otp_verification_page.dart';
 import 'package:movers/screen/authentication/sign_up.dart';
+import 'package:movers/screen/landing_page.dart';
 import 'package:movers/screen/map_page.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -26,7 +28,7 @@ class LoginController extends GetxController {
   RxBool verifyingOtp = false.obs;
 
   Rx<UserModel> userModel = UserModel().obs;
-  // Rx<User> firebaseUser;
+  late Rx<User?> firebaseUser;
   RxBool isLoggedIn = false.obs;
 
   @override
@@ -42,18 +44,18 @@ class LoginController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    // firebaseUser = Rx<User>(_auth.currentUser);
-    // firebaseUser.bindStream(_auth.userChanges);
-    // ever(firebaseUser, _setInitialScreen);
+    firebaseUser = Rx<User?>(_auth.currentUser);
+    firebaseUser.bindStream(_auth.userChanges());
+    ever(firebaseUser, _setInitialScreen);
   }
 
-  // _setInitialScreen(User user) {
-  //   if (user == null) {
-  //     Get.offAll(() => AuthenticationScreen());
-  //   } else {
-  //     Get.offAll(() => HomeScreen());
-  //   }
-  // }
+  _setInitialScreen(User? user) {
+    if (user == null) {
+      Get.offAll(() => LoginPage());
+    } else {
+      Get.offAll(() => LandingPage());
+    }
+  }
 
   @override
   void onClose() {
