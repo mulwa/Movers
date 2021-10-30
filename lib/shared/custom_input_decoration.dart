@@ -14,7 +14,7 @@ class CustomInputDecoration extends InputDecoration {
             ),
             contentPadding: EdgeInsets.only(left: 10, top: 8, bottom: 8),
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade200, width: 1.0),
+              borderSide: BorderSide(color: Colors.grey.shade50, width: 1.0),
             ),
             fillColor: Colors.white,
             filled: true);

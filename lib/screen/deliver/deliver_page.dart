@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:movers/controllers/delivery_controller.dart';
 import 'package:movers/models/address_model.dart';
+import 'package:movers/models/instruction_model.dart';
 import 'package:movers/shared/adress_search.dart';
 import 'package:movers/shared/custom_btn.dart';
 import 'package:movers/shared/custom_input_decoration.dart';
@@ -38,15 +39,6 @@ class DeliverPage extends GetView<DeliveryController> {
                 shrinkWrap: true,
                 children: [
                   VerticalSpacing(),
-                  Text(
-                    "What do you want to be delivered",
-                    style: GoogleFonts.raleway(
-                        fontSize: 16.0, fontWeight: FontWeight.w400),
-                  ),
-                  VerticalSpacing(),
-                  _packageDesc(),
-                  VerticalSpacing(),
-                  ShiftDivider(),
                   VerticalSpacing(),
                   Obx(
                     () => IconTitle(
@@ -92,6 +84,16 @@ class DeliverPage extends GetView<DeliveryController> {
                     ),
                   ),
                   VerticalSpacing(),
+                  Text(
+                    "What do you want to be delivered",
+                    style: GoogleFonts.raleway(
+                        fontSize: 16.0, fontWeight: FontWeight.w400),
+                  ),
+                  VerticalSpacing(),
+                  ShiftDivider(),
+                  VerticalSpacing(),
+                  _packageDesc(),
+                  VerticalSpacing(),
                   ShiftDivider(),
                   VerticalSpacing(),
                   Obx(
@@ -111,19 +113,25 @@ class DeliverPage extends GetView<DeliveryController> {
                   VerticalSpacing(),
                   Obx(
                     () => controller.pickUpAddress.value.placeName != null
-                        ? IconTitle(
-                            icon: Icons.note_add,
-                            title:
-                                "Pick up instruction at ${controller.pickUpAddress.value.placeName}",
-                            subTitle: "Call 0707200314",
-                            press: () {
-                              Get.bottomSheet(ExtraDetails(
-                                type: 'pick',
-                              ));
+                        ? Obx(() => IconTitle(
+                              icon: Icons.note_add,
+                              title:
+                                  "Pick up instruction at ${controller.pickUpAddress.value.placeName}",
+                              subTitle: controller.pickUpInstructions.value
+                                          .instructions ==
+                                      null
+                                  ? ""
+                                  : "${controller.pickUpInstructions.value.instructions} ${controller.pickUpInstructions.value.phoneNumber}",
+                              press: () {
+                                Get.bottomSheet(ExtraDetails(
+                                  type: 'pick',
+                                  instruction:
+                                      controller.pickUpInstructions.value,
+                                ));
 
-                              debugPrint('open pick up instruction ');
-                            },
-                          )
+                                debugPrint('open pick up instruction ');
+                              },
+                            ))
                         : Container(),
                   ),
                   VerticalSpacing(),
@@ -131,19 +139,25 @@ class DeliverPage extends GetView<DeliveryController> {
                   VerticalSpacing(),
                   Obx(
                     () => controller.destinationAddress.value.placeName != null
-                        ? IconTitle(
-                            icon: Icons.note_add,
-                            title:
-                                "Drop Off Instructions at ${controller.destinationAddress.value.placeName}",
-                            subTitle: "I will Be their",
-                            press: () {
-                              Get.bottomSheet(ExtraDetails(
-                                type: 'drop',
-                              ));
+                        ? Obx(() => IconTitle(
+                              icon: Icons.note_add,
+                              title:
+                                  "Drop Off Instructions at ${controller.destinationAddress.value.placeName}",
+                              subTitle: controller.dropOffInstructions.value
+                                          .instructions ==
+                                      null
+                                  ? ""
+                                  : "${controller.dropOffInstructions.value.instructions} ${controller.dropOffInstructions.value.phoneNumber}",
+                              press: () {
+                                Get.bottomSheet(ExtraDetails(
+                                  type: 'drop',
+                                  instruction:
+                                      controller.dropOffInstructions.value,
+                                ));
 
-                              debugPrint('open pick up address');
-                            },
-                          )
+                                debugPrint('open pick up address');
+                              },
+                            ))
                         : Container(),
                   )
                 ],
@@ -169,8 +183,10 @@ class DeliverPage extends GetView<DeliveryController> {
 
 class ExtraDetails extends GetView<DeliveryController> {
   final String type;
+  final Instruction? instruction;
   const ExtraDetails({
     required this.type,
+    this.instruction,
     Key? key,
   }) : super(key: key);
 
@@ -180,6 +196,10 @@ class ExtraDetails extends GetView<DeliveryController> {
       decoration: CustomInputDecoration(
         labelText: 'Instructions',
       ),
+      controller: instruction!.instructions == null
+          ? controller.instructionController
+          : controller.instructionController
+        ..text = instruction?.instructions ?? "",
       keyboardType: TextInputType.text,
       textInputAction: TextInputAction.next,
     );
@@ -190,7 +210,7 @@ class ExtraDetails extends GetView<DeliveryController> {
       // inputBorder: OutlineInputBorder(),
       inputDecoration: InputDecoration(border: OutlineInputBorder()),
       initialValue: controller.number.value,
-      // textFieldController: controller.phoneNumberController,
+      textFieldController: controller.phoneNumberController,
       selectorConfig: SelectorConfig(
         selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
       ),
@@ -233,7 +253,14 @@ class ExtraDetails extends GetView<DeliveryController> {
           CustomBtn(
             text: "Add",
             press: () {
-              print("Hey");
+              print("add clicked");
+              type == 'pick'
+                  ? controller.addPickUpInstructions(Instruction(
+                      instructions: controller.instructionController.text,
+                      phoneNumber: controller.phoneNumberController.text))
+                  : controller.dropOffInstructions(Instruction(
+                      instructions: controller.instructionController.text,
+                      phoneNumber: controller.phoneNumberController.text));
             },
           )
         ],
