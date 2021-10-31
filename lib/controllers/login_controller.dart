@@ -29,7 +29,6 @@ class LoginController extends GetxController {
 
   Rx<UserModel> userModel = UserModel().obs;
   late Rx<User?> firebaseUser;
-  RxBool isLoggedIn = false.obs;
 
   @override
   void onInit() {
@@ -53,6 +52,7 @@ class LoginController extends GetxController {
     if (user == null) {
       Get.offAll(() => LoginPage());
     } else {
+      _getUser(user.uid);
       Get.offAll(() => LandingPage());
     }
   }
@@ -87,7 +87,7 @@ class LoginController extends GetxController {
         if (userSnapshot.exists) {
           print("User Exists continue to booking details");
           _getUser(user.uid);
-          Get.to(MapPage());
+          Get.to(LandingPage());
         } else {
           print("User don't exist Go to Add user Details");
           Get.to(SignUpPage(
@@ -139,7 +139,7 @@ class LoginController extends GetxController {
           if (userSnapshot.exists) {
             debugPrint("User Exists continue to booking details");
             _getUser(user.uid);
-            Get.to(MapPage());
+            Get.to(LandingPage());
           } else {
             debugPrint("User don't exist Go to Add user Details");
             Get.to(SignUpPage(
@@ -154,7 +154,7 @@ class LoginController extends GetxController {
       verifyingOtp.value = false;
       Get.snackbar("Success", "Logged In successfully");
       // _getUser(credential.providerId);
-      Get.to(MapPage());
+      Get.to(LandingPage());
     } on FirebaseAuthException catch (e) {
       verifyingOtp.value = false;
       print("${e.message}");
@@ -169,5 +169,9 @@ class LoginController extends GetxController {
         .doc(userId)
         .get()
         .then((doc) => UserModel.fromSnapshot(doc));
+  }
+
+  void signOut() async {
+    await _auth.signOut();
   }
 }
