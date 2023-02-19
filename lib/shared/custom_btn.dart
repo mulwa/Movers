@@ -20,9 +20,11 @@ class CustomBtn extends StatelessWidget {
       width: size.width * 0.8,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(29.0),
-        child: FlatButton(
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-            color: color,
+        child: OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              backgroundColor: color,
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+            ),
             child: Text(
               text!.toUpperCase(),
               style: TextStyle(color: textColor),

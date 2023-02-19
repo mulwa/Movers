@@ -35,7 +35,7 @@ class PridictionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return OutlinedButton(
       onPressed: () {
         getPlaceDetails(prediction.placeId!, context);
       },
