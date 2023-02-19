@@ -29,6 +29,7 @@ class DeliverPage extends GetView<DeliveryController> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: colorPrimaryDark,
           title: Text("Delivery request"),
         ),
         body: Container(

@@ -17,6 +17,7 @@ class TransportDetailsPage extends GetView<TransportDetailsController> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: colorPrimaryDark,
           title: Text("Transport Details"),
         ),
         body: Padding(
@@ -84,7 +85,7 @@ class TransportDetailsPage extends GetView<TransportDetailsController> {
                       children: [
                         Icon(
                           Icons.date_range,
-                          color: Colors.blueAccent,
+                          color: colorAccent,
                         ),
                         SizedBox(
                           width: 10.0,
@@ -127,7 +128,7 @@ class TransportDetailsPage extends GetView<TransportDetailsController> {
                       children: [
                         Icon(
                           Icons.time_to_leave,
-                          color: Colors.blueAccent,
+                          color: colorAccent,
                         ),
                         SizedBox(
                           width: 10.0,

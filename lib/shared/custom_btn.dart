@@ -9,7 +9,7 @@ class CustomBtn extends StatelessWidget {
     Key? key,
     this.text,
     this.press,
-    this.color = colorPrimaryDark,
+    this.color = colorOrange,
     this.textColor = Colors.white,
   }) : super(key: key);
 

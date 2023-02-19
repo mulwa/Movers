@@ -17,6 +17,7 @@ class LandingPage extends StatelessWidget {
       child: Scaffold(
         drawer: AppDrawer(),
         appBar: AppBar(
+          backgroundColor: colorPrimaryDark,
           title: Text("Movers"),
         ),
         body: Container(

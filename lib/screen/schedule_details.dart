@@ -7,6 +7,7 @@ import 'package:movers/shared/app_card.dart';
 import 'package:movers/shared/custom_btn.dart';
 import 'package:movers/shared/styles.dart';
 import 'package:movers/shared/vertical_spacing.dart';
+import 'package:movers/utils/constants.dart';
 
 class ScheduleDetails extends StatelessWidget {
   final MapPageController mapController = Get.find();
@@ -18,6 +19,7 @@ class ScheduleDetails extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
+              backgroundColor: colorPrimaryDark,
               title: Text("Schedule Details"),
             ),
             body: ListView(
@@ -41,13 +43,13 @@ class ScheduleDetails extends StatelessWidget {
                     shrinkWrap: true,
                     children: [
                       titleSub(
-                          color: Colors.greenAccent,
+                          color: colorAccent,
                           title: mapController
                               .pickupAddress.value.placeFormattedAddress
                               .toString()),
                       VerticalSpacing(),
                       titleSub(
-                          color: Colors.blueAccent,
+                          color: colorAccent,
                           title: mapController
                               .destinationAddress.value.placeFormattedAddress
                               .toString()),
