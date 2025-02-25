@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "604076523173",
     "project_id": "movers-81e3a",
-    "storage_bucket": "movers-81e3a.appspot.com"
+    "storage_bucket": "movers-81e3a.firebasestorage.app"
   },
   "client": [
     {

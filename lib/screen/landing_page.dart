@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:movers/screen/deliver/deliver_page.dart';
 import 'package:movers/screen/drawer/appdrawer.dart';
 import 'package:movers/screen/map_page.dart';
-import 'package:movers/shared/app_card.dart';
 import 'package:movers/shared/styles.dart';
 import 'package:movers/shared/vertical_spacing.dart';
 import 'package:movers/utils/constants.dart';

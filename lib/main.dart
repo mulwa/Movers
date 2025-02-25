@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movers/controllers/login_controller.dart';
+import 'package:movers/firebase_options.dart';
 import 'package:movers/screen/authentication/login.dart';
 import 'package:movers/screen/landing_page.dart';
 import 'package:movers/screen/map_page.dart';
@@ -11,7 +12,8 @@ import 'package:movers/utils/constants.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp().then((value) => {Get.put(LoginController())});
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+      .then((value) => {Get.put(LoginController())});
   runApp(MyApp());
 }
 
@@ -28,8 +30,12 @@ class MyApp extends StatelessWidget {
               unselectedLabelStyle: GoogleFonts.montserrat(fontSize: 16)),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           appBarTheme: AppBarTheme(
-            textTheme:
-                GoogleFonts.ralewayTextTheme(Theme.of(context).textTheme),
+            toolbarTextStyle:
+                GoogleFonts.ralewayTextTheme(Theme.of(context).textTheme)
+                    .bodyMedium,
+            titleTextStyle:
+                GoogleFonts.ralewayTextTheme(Theme.of(context).textTheme)
+                    .headlineMedium,
           ),
           textTheme: GoogleFonts.ralewayTextTheme(Theme.of(context).textTheme)),
       home: Center(

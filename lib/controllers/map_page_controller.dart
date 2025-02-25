@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:movers/models/address_model.dart';
 import 'package:movers/models/direction_details.dart';
 import 'package:movers/utils/helper_methods.dart';
@@ -15,7 +14,7 @@ class MapPageController extends GetxController {
   Rx<GoogleMapController>? mapController;
 
   late CameraPosition cameraPosition;
-  late Position position;
+  // late Position position;
 
   var pickupAddress = Address().obs;
   var fromAddress = ''.obs;
@@ -32,20 +31,20 @@ class MapPageController extends GetxController {
 
   @override
   void onInit() {
-    setUpPositionLocator();
+    // setUpPositionLocator();
     super.onInit();
   }
 
-  void setUpPositionLocator() async {
-    print("current location called");
-    position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.bestForNavigation);
+  // void setUpPositionLocator() async {
+  //   print("current location called");
+  //   position = await Geolocator.getCurrentPosition(
+  //       desiredAccuracy: LocationAccuracy.bestForNavigation);
 
-    LatLng currentLatLng = LatLng(position.latitude, position.longitude);
-    cameraPosition = new CameraPosition(target: currentLatLng, zoom: 14);
-    mapController?.value
-        .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-  }
+  //   LatLng currentLatLng = LatLng(position.latitude, position.longitude);
+  //   cameraPosition = new CameraPosition(target: currentLatLng, zoom: 14);
+  //   mapController?.value
+  //       .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+  // }
 
   void updatePickupAddress(Address pickup) {
     pickupAddress.value = pickup;

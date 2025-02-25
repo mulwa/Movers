@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movers/controllers/transport_details_controller.dart';
 import 'package:movers/screen/schedule_details.dart';
-import 'package:movers/shared/app_card.dart';
 import 'package:movers/shared/custom_btn.dart';
 import 'package:movers/shared/vertical_spacing.dart';
 import 'package:movers/utils/constants.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class TransportDetailsPage extends GetView<TransportDetailsController> {
   const TransportDetailsPage({Key? key}) : super(key: key);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 import 'package:movers/controllers/map_page_controller.dart';
 import 'package:movers/models/address_model.dart';
 import 'package:movers/screen/transport_details_page.dart';
@@ -45,36 +44,36 @@ class MapPage extends StatelessWidget {
                                   : _mapPageController.pickupAddress.value
                                       .placeFormattedAddress,
                               onPress: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PlacePicker(
-                                      apiKey: MAPKEY, // Put YOUR OWN KEY here.
-                                      onPlacePicked: (result) {
-                                        print(result);
-                                        Address fromAddress = new Address();
-                                        fromAddress.latitude =
-                                            result.geometry!.location.lat;
-                                        fromAddress.longitude =
-                                            result.geometry!.location.lng;
-                                        fromAddress.placeFormattedAddress =
-                                            result.formattedAddress;
-                                        fromAddress.placeName = result.name;
-                                        fromAddress.placeId = result.id;
-                                        _mapPageController
-                                            .updatePickupAddress(fromAddress);
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) => PlacePicker(
+                                //       apiKey: MAPKEY, // Put YOUR OWN KEY here.
+                                //       onPlacePicked: (result) {
+                                //         print(result);
+                                //         Address fromAddress = new Address();
+                                //         fromAddress.latitude =
+                                //             result.geometry!.location.lat;
+                                //         fromAddress.longitude =
+                                //             result.geometry!.location.lng;
+                                //         fromAddress.placeFormattedAddress =
+                                //             result.formattedAddress;
+                                //         fromAddress.placeName = result.name;
+                                //         fromAddress.placeId = result.id;
+                                //         _mapPageController
+                                //             .updatePickupAddress(fromAddress);
 
-                                        Navigator.of(context).pop();
-                                      },
-                                      initialPosition: LatLng(
-                                          _mapPageController.position.latitude,
-                                          _mapPageController
-                                              .position.longitude),
+                                //         Navigator.of(context).pop();
+                                //       },
+                                //       initialPosition: LatLng(
+                                //           _mapPageController.position.latitude,
+                                //           _mapPageController
+                                //               .position.longitude),
 
-                                      useCurrentLocation: true,
-                                    ),
-                                  ),
-                                );
+                                //       useCurrentLocation: true,
+                                //     ),
+                                //   ),
+                                // );
                               },
                             ),
                             SizedBox(
@@ -92,39 +91,39 @@ class MapPage extends StatelessWidget {
                                   : _mapPageController.destinationAddress.value
                                       .placeFormattedAddress,
                               onPress: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PlacePicker(
-                                      apiKey: MAPKEY, // Put YOUR OWN KEY here.
-                                      onPlacePicked: (PickResult result) {
-                                        Address toAddress = new Address();
-                                        toAddress.latitude =
-                                            result.geometry!.location.lat;
-                                        toAddress.longitude =
-                                            result.geometry!.location.lng;
-                                        toAddress.placeFormattedAddress =
-                                            result.formattedAddress;
-                                        toAddress.placeName = result.name;
-                                        toAddress.placeId = result.id;
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) => PlacePicker(
+                                //       apiKey: MAPKEY, // Put YOUR OWN KEY here.
+                                //       onPlacePicked: (PickResult result) {
+                                //         Address toAddress = new Address();
+                                //         toAddress.latitude =
+                                //             result.geometry!.location.lat;
+                                //         toAddress.longitude =
+                                //             result.geometry!.location.lng;
+                                //         toAddress.placeFormattedAddress =
+                                //             result.formattedAddress;
+                                //         toAddress.placeName = result.name;
+                                //         toAddress.placeId = result.id;
 
-                                        _mapPageController
-                                            .updateDestinationAddress(
-                                                toAddress);
+                                //         _mapPageController
+                                //             .updateDestinationAddress(
+                                //                 toAddress);
 
-                                        _mapPageController.getDirection();
+                                //         _mapPageController.getDirection();
 
-                                        Navigator.of(context).pop();
-                                      },
-                                      initialPosition: LatLng(
-                                          _mapPageController.position.latitude,
-                                          _mapPageController
-                                              .position.longitude),
+                                //         Navigator.of(context).pop();
+                                //       },
+                                //       initialPosition: LatLng(
+                                //           _mapPageController.position.latitude,
+                                //           _mapPageController
+                                //               .position.longitude),
 
-                                      useCurrentLocation: true,
-                                    ),
-                                  ),
-                                );
+                                //       useCurrentLocation: true,
+                                //     ),
+                                //   ),
+                                // );
                               },
                             ),
                             SizedBox(

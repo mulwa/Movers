@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:movers/models/address_model.dart';
 import 'package:movers/models/place_prediction.dart';
 import 'package:movers/utils/constants.dart';
 import 'package:movers/utils/request_helper.dart';
-import 'package:provider/provider.dart';
 
 class PridictionTile extends StatelessWidget {
   final Prediction prediction;

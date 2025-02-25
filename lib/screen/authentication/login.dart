@@ -1,15 +1,10 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movers/controllers/login_controller.dart';
 import 'package:movers/screen/authentication/otp_verification_page.dart';
-import 'package:movers/screen/authentication/sign_up.dart';
-import 'package:movers/shared/app_card.dart';
 import 'package:movers/shared/custom_btn.dart';
-import 'package:movers/shared/custom_input_decoration.dart';
 import 'package:movers/shared/styles.dart';
 import 'package:movers/shared/vertical_spacing.dart';
-import 'package:movers/utils/constants.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class LoginPage extends GetView<LoginController> {

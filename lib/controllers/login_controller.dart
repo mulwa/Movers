@@ -7,10 +7,8 @@ import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:movers/models/user_model.dart';
 import 'package:movers/screen/authentication/login.dart';
-import 'package:movers/screen/authentication/otp_verification_page.dart';
 import 'package:movers/screen/authentication/sign_up.dart';
 import 'package:movers/screen/landing_page.dart';
-import 'package:movers/screen/map_page.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class LoginController extends GetxController {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movers/controllers/login_controller.dart';
-import 'package:movers/shared/app_card.dart';
 import 'package:movers/shared/styles.dart';
 import 'package:movers/shared/vertical_spacing.dart';
 

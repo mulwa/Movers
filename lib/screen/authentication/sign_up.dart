@@ -1,16 +1,12 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:movers/controllers/sign_up_controller.dart';
-import 'package:movers/screen/authentication/login.dart';
 import 'package:movers/shared/app_card.dart';
 import 'package:movers/shared/custom_btn.dart';
 import 'package:movers/shared/custom_input_decoration.dart';
 import 'package:movers/shared/progressDialog.dart';
 import 'package:movers/shared/styles.dart';
 import 'package:movers/shared/vertical_spacing.dart';
-import 'package:movers/utils/constants.dart';
 
 class SignUpPage extends GetView<SignUpController> {
   final String uid;
